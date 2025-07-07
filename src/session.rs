@@ -1,5 +1,5 @@
 use crate::{
-    db::LineDb, progress::ProgressState, report::RunReport, Format, Location, Repeat, Replacement,
+    Format, Location, Repeat, Replacement, db::LineDb, progress::ProgressState, report::RunReport,
 };
 use futures::{StreamExt, TryFutureExt, TryStreamExt};
 use std::path::{Path, PathBuf};

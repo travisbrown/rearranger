@@ -1,7 +1,7 @@
-use crate::{report::WriteReport, Format};
+use crate::{Format, report::WriteReport};
 use rocksdb::{BlockBasedOptions, DBCompressionType, IteratorMode, Options, TransactionDB};
-use std::collections::hash_map::Entry;
 use std::collections::HashMap;
+use std::collections::hash_map::Entry;
 use std::fs::File;
 use std::io::{BufWriter, Write};
 use std::marker::PhantomData;

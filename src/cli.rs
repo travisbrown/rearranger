@@ -1,4 +1,4 @@
-use crate::{report::RunReport, session::FileOrder, Format};
+use crate::{Format, report::RunReport, session::FileOrder};
 use clap::{Arg, ArgAction, ArgMatches, Command};
 use std::path::PathBuf;
 
