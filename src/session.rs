@@ -21,6 +21,8 @@ pub enum Error<F> {
     Task(#[from] tokio::task::JoinError),
     #[error("Database error")]
     Db(#[from] crate::db::Error<F>),
+    #[error("Key parsing error")]
+    KeyParsing(crate::db::Error<F>, PathBuf, usize),
     #[error("Input lines error")]
     Lines(#[from] crate::lines::Error),
     #[error("Invalid output directory path")]
@@ -74,7 +76,10 @@ where
 
                     for result in lines {
                         let (line_number, line) = result?;
-                        if let Some(replaced) = db.insert(&line)? {
+                        if let Some(replaced) = db
+                            .insert(&line)
+                            .map_err(|error| Error::KeyParsing(error, path.clone(), line_number))?
+                        {
                             let replacement = replaced.map(|value| Replacement {
                                 old_value: value,
                                 new_value: line.clone(),
